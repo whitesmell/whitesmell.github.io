@@ -5,6 +5,7 @@ baseurl: ""
 timezone: Asia/Shanghai
 lang: zh-CN
 google_analytics: G-3EL6S0HR63
+adsense_client: ca-pub-9789894222718309
 permalink: /articles/:slug/
 markdown: kramdown
 kramdown:
