@@ -114,6 +114,20 @@ export async function audit(root, { built = false, privateDir } = {}) {
     throw Error("Private data tracked");
   if (built) {
     const site = path.join(root, "_site");
+    const topics = JSON.parse(await fs.readFile(path.join(root, "_data/topics.json"), "utf8"));
+    const topicIndex = await fs.readFile(path.join(site, "topics/index.html"), "utf8");
+    for (const tag of new Set(metas.flatMap((meta) => meta.tags))) {
+      const topic = topics[tag];
+      if (!topic?.title || !topic.description || !topic.slug)
+        throw Error("Undefined topic metadata: " + tag);
+      if (!topicIndex.includes(`href="/topics/${topic.slug}/"`) || !topicIndex.includes(topic.title) || !topicIndex.includes(topic.description))
+        throw Error("Topic index missing name, description or link: " + tag);
+      const topicPage = await fs.readFile(path.join(site, `topics/${topic.slug}/index.html`), "utf8");
+      const expected = metas.filter((meta) => meta.tags.includes(tag));
+      const links = [...topicPage.matchAll(/href="(\/articles\/[^" ]+\/?)"/g)].map((match) => match[1]);
+      if (links.length !== expected.length || expected.some((meta) => !links.includes(meta.permalink)))
+        throw Error("Topic article membership mismatch: " + tag);
+    }
     for (const p of ["scripts", "tests", "migration-private", ".git"])
       if (
         await fs

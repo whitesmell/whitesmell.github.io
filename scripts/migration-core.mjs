@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { flag, identity } from "./source.mjs";
+import { classifyTopics } from "./topics.mjs";
 export const hash = (value) => createHash("sha256").update(value).digest("hex");
 export function pagePayment(flags) {
   const values = ["is_pay_subscribe", "need_pay", "isPayTopic"].map((k) =>
@@ -10,14 +11,6 @@ export function pagePayment(flags) {
   if (values.includes("paid")) return "paid";
   return values.every((v) => v === "free") ? "free" : "unknown";
 }
-const topics = [
-  ["AI编程", /编程|coding|代码|Claude Code|Codex|Cursor/i],
-  ["RAG", /RAG|检索增强|知识库|知识治理/i],
-  ["AI Agent", /agent|智能体|Manus|助理/i],
-  ["AI工具", /工具|开源|实践|实测|教程|用法/i],
-  ["行业分析", /融资|估值|行业|百强|a16z|榜单/i],
-  ["AI思考", /认知|哲学|社会|人类|人文|未来/i],
-];
 export function metadata(row, source, previous = {}) {
   const id = identity(row),
     title = source.title?.trim();
@@ -28,11 +21,7 @@ export function metadata(row, source, previous = {}) {
     .toISOString()
     .replace("Z", "+08:00");
   const date = published.slice(0, 10);
-  const tags = topics
-    .filter(([, re]) => re.test(title + " " + source.text.slice(0, 1200)))
-    .map(([t]) => t)
-    .slice(0, 3);
-  if (!tags.length) tags.push("产品解读");
+  const tags = classifyTopics(title, source.digest || source.text.slice(0, 300));
   const clean = (s) => s.replace(/\s+/g, " ").trim();
   const paragraphs =
     source.paragraphs

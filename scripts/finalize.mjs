@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { parsePost } from "./audit.mjs";
 import { postText, atomicWrite } from "./migration-core.mjs";
+import { classifyTopics } from "./topics.mjs";
 const priv = path.resolve(
   process.env.MIGRATION_PRIVATE || "../../migration-private",
 );
@@ -20,6 +21,7 @@ for (const file of await fs.readdir("_posts"))
     ...parsePost(await fs.readFile(path.join("_posts", file), "utf8")),
   });
 for (const entry of entries) {
+  entry.meta.tags = classifyTopics(entry.meta.title, entry.meta.description);
   for (const key of ["seo_title", "description", "tags"])
     if (overrides[entry.meta.source_id]?.[key])
       entry.meta[key] = overrides[entry.meta.source_id][key];

@@ -32,6 +32,7 @@ test("finalization distinguishes duplicate titles, builds populated topics and p
     );
   }
   await fs.writeFile(path.join(priv, "state.json"), JSON.stringify(state));
+  await fs.writeFile(path.join(priv, "seo-overrides.json"), JSON.stringify({ a: { tags: ["RAG"] }, b: { tags: ["RAG"] } }));
   await fs.writeFile(path.join(root, "assets/images/orphan.png"), "DISPOSABLE");
   try {
     execFileSync(
