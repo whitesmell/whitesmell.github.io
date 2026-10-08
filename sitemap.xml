@@ -1,0 +1,5 @@
+---
+layout: null
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>{{ '/' | absolute_url }}</loc></url><url><loc>{{ '/archive/' | absolute_url }}</loc></url><url><loc>{{ '/topics/' | absolute_url }}</loc></url><url><loc>{{ '/about/' | absolute_url }}</loc></url>{% for page in site.pages %}{% if page.layout == 'topic' %}<url><loc>{{ page.url | absolute_url }}</loc></url>{% endif %}{% endfor %}{% for post in site.posts %}<url><loc>{{ post.url | absolute_url | xml_escape }}</loc><lastmod>{{ post.modified_at | default: post.published_at }}</lastmod></url>{% endfor %}</urlset>

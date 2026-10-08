@@ -1,0 +1,7 @@
+---
+layout: default
+title: 文章主题
+permalink: /topics/
+description: 按AI工具、AI Agent、RAG、AI编程、产品解读、行业分析和AI思考探索子非AI文章。
+---
+<section class="page"><p class="eyebrow">TOPICS</p><h1>顺着兴趣读下去。</h1><p class="intro">从工具和案例入手，再看看技术背后的变化。</p>{% assign tags = site.tags | sort %}{% for tag in tags %}<section class="topic" id="{{ tag[0] | slugify }}">{% assign topic = site.data.topics[tag[0]] %}<h2><a href="/topics/{{ topic.slug }}/">{{ topic.title | escape }} →</a></h2><p>{{ topic.description | escape }}</p><ul>{% for post in tag[1] limit:8 %}<li><a href="{{ post.url }}">{{ post.title | escape }}</a></li>{% endfor %}</ul></section>{% endfor %}</section>

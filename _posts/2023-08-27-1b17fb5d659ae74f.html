@@ -1,0 +1,19 @@
+---
+layout: "post"
+source_id: "1b17fb5d659ae74f"
+title: "超越GPT：微调版CodeLlama-34B打败GPT-4在HumanEval上的表现"
+seo_title: "超越GPT：微调版CodeLlama-34B打败GPT-4在HumanEval上的表现"
+description: "我们在一个内部的Phind数据集上对CodeLlama-34B和CodeLlama-34B-Python进行"
+tags: ["AI编程"]
+author: "非子爱"
+author_type: "Person"
+published_at: "2023-08-27T00:03:00.000+08:00"
+date: "2023-08-27T00:03:00.000+08:00"
+permalink: "/articles/2023-08-27-gpt-1b17fb5d659ae74f/"
+source_url: "https://mp.weixin.qq.com/s/59g3gwYSGBsmcadu4jEjWA"
+render_with_liquid: false
+payment_status: "free"
+source_hash: "d41c59396309d7e6022410a540d40a549b664bb457a76f26b7ca46041eb300d6"
+cover: "/assets/images/879203198f37c7e922ed3885.webp"
+---
+<p><span style="font-size: var(--articleFontsize);letter-spacing: 0.034em">我们在一个内部的Phind数据集上对CodeLlama-34B和CodeLlama-34B-Python进行了微调，分别在HumanEval上达到了67.6%和69.5%的pass@1的成绩。</span><span style="font-size: var(--articleFontsize);letter-spacing: 0.034em">GPT-4在三月份的官方技术报告中</span><span style="font-size: var(--articleFontsize);letter-spacing: 0.034em">宣称达到了67%的pass@1。</span><span style="font-size: var(--articleFontsize);letter-spacing: 0.034em">为了确保结果的有效性，我们对我们的数据集采用了OpenAI的去污染方法。</span><span style="font-size: var(--articleFontsize);letter-spacing: 0.034em">昨天发布的CodeLlama模型在HumanEval上展示了令人印象深刻的性能。</span><br></p><p style="text-align: center"><img src="/assets/images/b2fd53bac71bc35a14077123.webp" alt="图片" loading="lazy" width="1080" height="952"></p><p>CodeLlama-34B在HumanEval上达到了48.8%的pass@1 CodeLlama-34B-Python在HumanEval上达到了53.7%的pass@1 我们在一个专有的数据集上对这两个模型进行了微调，这个数据集包含了约80k个高质量的编程问题和解决方案。与HumanEval不同，这个数据集的结构是指令-答案对，而不是代码补全示例。我们对Phind模型进行了两个epoch的训练，总共约160k个样本。我们没有使用LoRA，而是进行了原生的微调。我们使用了DeepSpeed ZeRO 3和Flash Attention 2，在32个A100-80GB GPU上，以4096个token的序列长度，在三个小时内完成了这些模型的训练。</p><p>此外，我们对我们的数据集应用了OpenAI的去污染方法，以确保结果的有效性，并且没有发现任何被污染的样本。这个方法是：</p><p>对于每个评估样本，我们随机采样了三个50个字符的子串，或者如果样本少于50个字符，则使用整个样本。如果任何采样的子串是处理过的训练样本的子串，则认为匹配成功。关于去污染方法的更多细节，请参考OpenAI技术报告的附录C。下面是我们用微调过的模型在HumanEval上达到的pass@1分数：</p><h2>Phind-CodeLlama-34B-v1在HumanEval上达到了67.6%的pass@1 Phind-CodeLlama-34B-Python-v1在HumanEval上达到了69.5%的pass@1。</h2><h2>Huggingface 下载地址：</h2><ul><li><h2 style="letter-spacing: 0.578px;text-align: left">Phind-CodeLlama-34B-v1：https://huggingface.co/Phind/Phind-CodeLlama-34B-v1</h2></li><li><p style="text-align: left">Phind-CodeLlama-34B-Python-v1：h<span style="font-size: var(--articleFontsize);letter-spacing: 0.034em">ttps://huggingface.co/Phind/Phind-CodeLlama-34B-Python-v1</span></p></li></ul><p><br></p><p></p>

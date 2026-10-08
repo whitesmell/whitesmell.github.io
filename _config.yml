@@ -1,0 +1,11 @@
+title: 子非AI
+description: 子非AI，焉知AI之乐。AI工具、应用案例、技术洞察与人文思考。
+url: https://whitesmell.github.io
+baseurl: ""
+timezone: Asia/Shanghai
+lang: zh-CN
+permalink: /articles/:slug/
+markdown: kramdown
+kramdown:
+  input: GFM
+exclude: [scripts, tests, Gemfile, Gemfile.lock, package.json, package-lock.json, README.md, vendor, migration-private]

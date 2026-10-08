@@ -1,0 +1,7 @@
+---
+layout: default
+title: 文章归档
+permalink: /archive/
+description: 按发表时间浏览子非AI公众号的免费文章，涵盖AI工具、应用案例、技术洞察与人文思考。
+---
+<section class="page"><p class="eyebrow">ARCHIVE</p><h1>文章归档</h1><p class="intro">{{ site.posts.size }} 篇文章，从新到旧。</p>{% assign groups = site.posts | group_by_exp: 'post', "post.date | date: '%Y'" %}{% for group in groups %}<h2>{{ group.name }}</h2><ul class="archive-list">{% for post in group.items %}<li><time>{{ post.date | date: '%m.%d' }}</time><a href="{{ post.url }}">{{ post.title | escape }}</a></li>{% endfor %}</ul>{% endfor %}</section>
