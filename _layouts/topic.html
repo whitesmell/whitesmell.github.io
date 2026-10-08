@@ -1,0 +1,4 @@
+---
+layout: default
+---
+<section class="page"><nav class="breadcrumb" aria-label="面包屑"><a href="/">首页</a> / <a href="/topics/">主题</a> / {{ page.topic | escape }}</nav><p class="eyebrow">{{ page.topic | escape }}</p><h1>{{ page.title | escape }}</h1><p class="intro">{{ page.description | escape }}</p><ul class="archive-list">{% for post in site.tags[page.topic] %}<li><time>{{ post.date | date: '%Y.%m.%d' }}</time><a href="{{ post.url }}">{{ post.title | escape }}</a></li>{% endfor %}</ul></section>

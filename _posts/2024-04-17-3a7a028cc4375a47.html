@@ -1,0 +1,19 @@
+---
+layout: "post"
+source_id: "3a7a028cc4375a47"
+title: "吴恩达谈 AI Agent 设计模式：规划 Planning"
+seo_title: "吴恩达谈 AI Agent 设计模式：规划 Planning"
+description: "规划是具有自主决策能力的 AI 设计模式中的一个关键要素，我们利用大型语言模型（ LLM ）来自主决定执行哪些步骤序列，以完成一项更大的任务。例如，如果我们要求一个 代理就某个特定主题进行在线研究，用 LLM 将目标分解"
+tags: ["AI Agent"]
+author: "非子爱"
+author_type: "Person"
+published_at: "2024-04-17T07:49:43.000+08:00"
+date: "2024-04-17T07:49:43.000+08:00"
+permalink: "/articles/2024-04-17-ai-agent-3a7a028cc4375a47/"
+source_url: "https://mp.weixin.qq.com/s/kMKOCFF977jmhfnNCLAg5A"
+render_with_liquid: false
+payment_status: "free"
+source_hash: "4bab88bd3fc690f8d1b6aca5106e45251b544832821161dfbbd0768e0b3ab1aa"
+cover: "/assets/images/9c11c9f9ea27d9e29aae4486.jpg"
+---
+<p><span style="font-size: var(--articleFontsize);letter-spacing: 0.034em">近日，备受瞩目的人工智能(AI)大师Andrew Ng被任命为亚马逊公司董事会成员，这无疑将进一步推动人工智能在商业领域的深度应用。作为人工智能发展的先驱，Andrew Ng不仅多年来致力于机器学习和深度学习等核心技术的研究创新，更为AI的未来发展道路提出了颇具前瞻性的设想。其中，"规划"(Planning)设计模式被视为AI代理工作流程迈向新台阶的关键一步。</span><br></p><p><img src="/assets/images/6b4dd1b70699169f86ff5e81.webp" alt="图片" loading="lazy" width="1080" height="608"></p><p>规划是具有自主决策能力的 AI 设计模式中的一个关键要素，我们利用大型语言模型（ LLM ）来自主决定执行哪些步骤序列，以完成一项更大的任务。例如，如果我们要求一个 代理就某个特定主题进行在线研究，我们可以用 LLM 将目标分解成更小的子任务，例如研究特定子主题、综合研究结果以及编写报告。</p><p>许多人在 ChatGPT 发布后不久就经历了“ChatGPT 时刻”。他们试用 ChatGPT 后惊讶地发现，它远远超出了他们对 AI 能力的预期。如果你还没有经历过类似的“AI 代理时刻”，我希望你很快就会体验到。几个月前，我演示了一个我开发的研究代理的现场演示，该代理可以访问各种在线搜索工具，当时我经历了这样一个时刻。</p><p>我曾多次私下测试过这个代理，在此期间，它一直使用网络搜索工具收集信息并撰写摘要。然而，在现场演示期间，网络搜索 API 意外地返回了一个速率限制错误。我以为我的演示会公开失败，我很害怕接下来会发生什么。令我惊讶的是，代理巧妙地切换到一个维基百科搜索工具（我已经忘了我给过它这个工具），并使用维基百科而不是网络搜索完成了任务。</p><p>这对我来说是一个令人惊讶的 AI 代理时刻。我认为许多还没有经历过这样时刻的人在接下来的几个月里也会经历。当你看到一个代理自主地决定以你没有预料到的方式做事，并最终获得成功时，这是一件令人惊叹的事情！</p><p>许多任务无法通过单个步骤或单个工具调用完成，但代理可以决定采取哪些步骤。例如，为了简化 HuggingGPT 论文（如下引用）中的一个例子，如果你想让一个代理考虑一个男孩的图片并画一个相同姿势的女孩的图片，任务可能会分解成两个不同的步骤：</p><p>(i) 检测男孩图片中的姿势，以及&nbsp;</p><p>(ii) 渲染一个女孩在检测到的姿势中的图片。</p><p><img style="letter-spacing: 0.578px" src="/assets/images/c8a6e45085927654d41735da.webp" alt="图片" loading="lazy" width="1080" height="608"></p><p>一个 LLM 可能会被微调或提示（使用少样本提示）来指定一个计划，方法是输出一个类似“{tool: pose-detection, input: image.jpg, output: temp1 } {tool: pose-to-image, input: temp1, output: final.jpg}”的字符串。</p><p>这个结构化输出指定了要采取的两个步骤，然后触发软件调用姿势检测工具，然后调用姿势到图像工具来完成任务。(这个例子仅供说明；HuggingGPT 使用不同的格式。)</p><p>诚然，许多代理工作流不需要规划。例如，你可能让一个代理反思并改进它的输出固定的次数。在这种情况下，代理采取的步骤序列是固定的和确定的。但是对于复杂的任务，你无法提前指定将任务分解成一组步骤，规划允许代理动态地决定要采取哪些步骤。</p><p>一方面，规划是一个非常强大的能力；另一方面，它会导致不太可预测的结果。根据我的经验，虽然我可以让反思和工具使用的代理设计模式可靠地工作并提高我的应用程序的性能，但规划是一个不太成熟的技术，我发现很难提前预测它会做什么。但该领域继续快速发展，我相信规划能力将迅速提高。</p><p>如果你有兴趣了解更多关于 LLM 规划的信息，我推荐：</p><p>“Chain-of-Thought Prompting Elicits Reasoning in Large Language Models,” Wei et al. ( 2022 )</p><p>“HuggingGPT: Solving AI Tasks with ChatGPT and its Friends in Hugging Face,” Shen et al. ( 2023 )</p><p>“Understanding the planning of LLM agents: A survey,” by Huang et al. ( 2024 )</p><p>继续学习!<strong style="color: rgb(2, 30, 170);font-size: 24px;letter-spacing: 0.034em"></strong></p><p></p>

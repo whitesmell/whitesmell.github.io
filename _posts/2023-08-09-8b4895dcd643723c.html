@@ -1,0 +1,19 @@
+---
+layout: "post"
+source_id: "8b4895dcd643723c"
+title: "StabilityAI发布代码生成模型StableCode"
+seo_title: "StabilityAI发布代码生成模型StableCode"
+description: "随着StabilityAI公布其首款生成式人工智能产品 StableCode 的发布,编程工作也迎来了一个崭"
+tags: ["AI编程","大模型","产品解读"]
+author: "非子爱"
+author_type: "Person"
+published_at: "2023-08-09T08:03:12.000+08:00"
+date: "2023-08-09T08:03:12.000+08:00"
+permalink: "/articles/2023-08-09-stabilityai-8b4895dcd643723c/"
+source_url: "https://mp.weixin.qq.com/s/_Q_ceaLOSMWUFEi-pPSAaQ"
+render_with_liquid: false
+payment_status: "free"
+source_hash: "8c3878912104dbece3105dce30935bbde34f1554af4019753c925e3bad80ec8f"
+cover: "/assets/images/103757cd6cf599ea04626f40.jpg"
+---
+<p>随着StabilityAI公布其首款生成式人工智能产品 StableCode 的发布,编程工作也迎来了一个崭新的时代。StableCode 采用三种不同的模型来帮助开发者提高编码效率,是一款协助程序员日常工作以及为新开发者提供绝佳学习工具的产品。</p><p style="text-align: center"><img src="/assets/images/bbaa6b234e4166cd3326600f.webp" alt="图片" loading="lazy" width="1064" height="1066"></p><p>StableCode 的基础模型首先在 stack-dataset(v1.2) 中训练了各种编程语言,之后在Python、Go、Java、Javascript、C、markdown 和 C++等流行语言上进行了进一步训练。总体而言,我们在高性能计算集群上对560B个代码令牌进行了训练。</p><p><br></p><p>在基础模型建立之后,指令模型针对特定使用案例进行了调优,以帮助解决复杂的编程任务。我们使用Alpaca格式对基础模型进行了约12万个代码指令/响应对的训练来实现这一结果。</p><p><br></p><p>以下是使用StableCode Instruct生成对应指令响应的代码示例:</p><p style="text-align: center"><img src="/assets/images/48ecf1c2abd95714d21fd13d.webp" alt="图片" loading="lazy" width="1080" height="607"></p><p>StableCode 的长上下文窗口模型是一个理想的编程助手,可以为用户提供单行和多行的自动补全建议。相比此前发布的开源模型(上下文窗口为1.6万个令牌),该模型可以处理更多的代码(上下文可达4倍之多),允许用户同时查看或编辑5个平均规模的 Python 文件,因此是初学者提升编程能力的理想工具。</p><p><br></p><p>StableCode 完成一个较复杂的利用 Pytorch 深度学习库的 python 文件(灰色文本显示 StableCode 的预测)。</p><p style="text-align: center"><img src="/assets/images/93866ee7224e8b7b9f600f11.webp" alt="图片" loading="lazy" width="1080" height="992"></p><p><br></p><p>我们还与参数规模和训练语料规模相似的其他模型进行了对比。我们使用流行的 HumanEval 基准上的标准 pass@1 和 pass@10 指标进行评测。</p><p style="text-align: center"><img src="/assets/images/4832e88edabe6114c5a46280.webp" alt="图片" loading="lazy" width="1080" height="141"></p><p>StableCode与类似规模模型(30亿参数)的HumanEval基准对比结果。&nbsp;</p><p style="text-align: center"><img src="/assets/images/7a1fd12f999f9f2c6bc2727e.webp" alt="图片" loading="lazy" width="1080" height="568"></p><p><br></p><p>Stability AI 的目标是让技术更易于访问。StableCode 是朝着这个目标迈出的重要一步。利用AI,全球每一个人都能创造代码来解决日常问题并改善生活。我们希望StableCode可以帮助未来10亿软件开发者学习编程,在全球范围内提供更公平的技术访问机会。</p><p>参考：<br></p><ol><li><p>https://stability.ai/blog/stablecode-llm-generative-ai-coding</p></li><li><p>https://huggingface.co/stabilityai/stablecode-completion-alpha-3b</p></li></ol><p></p>

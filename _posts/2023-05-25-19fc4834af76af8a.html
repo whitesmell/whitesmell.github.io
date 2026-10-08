@@ -1,0 +1,19 @@
+---
+layout: "post"
+source_id: "19fc4834af76af8a"
+title: "Copilot Stack：微软CTO讲AI原生应用架构"
+seo_title: "Copilot Stack：微软CTO讲AI原生应用架构"
+description: "微软在 Build 2023 大会上发布的 Copilot Stack，这是一种新的 AI 驱动的软件开发模式，可以让开发者实现自己的 Copilot 或为现有的 Copilot 开发插件。"
+tags: ["AI编程"]
+author: "非子爱"
+author_type: "Person"
+published_at: "2023-05-25T12:21:44.000+08:00"
+date: "2023-05-25T12:21:44.000+08:00"
+permalink: "/articles/2023-05-25-copilot-stack-19fc4834af76af8a/"
+source_url: "https://mp.weixin.qq.com/s/zSg7BPjX4Wv2HIuBWlyaqQ"
+render_with_liquid: false
+payment_status: "free"
+source_hash: "c65ceda5bfa281fa9d7672ef4318995946f405918ceea84c920c4865dfdcc425"
+cover: "/assets/images/e81e87cac7011e5a1e74c108.webp"
+---
+<p style="text-align: center"><img src="/assets/images/f6310365304297b020e42b51.webp" alt="图片" loading="lazy" width="1080" height="551"></p><p style="text-align: left">如果你是一位软件开发者，你一定对微软在今年初推出的 Copilot 感到兴奋。Copilot 是一种基于 ChatGPT 的对话式人工智能助手，它可以帮助你完成各种编程任务，从生成代码，到写文档，到调试错误。Copilot 不仅可以理解你的意图和需求，还可以根据你的上下文和偏好来给出最合适的建议和解决方案。Copilot 已经被集成到了微软的各种产品和服务中，例如 Microsoft 365、Dynamics 365、GitHub、Bing 等，让你可以在任何场景下享受 Copilot 的智能帮助。<br></p><p><img style="letter-spacing: 0.578px;text-align: center" src="/assets/images/17ed3e292c274460ee407be7.webp" alt="图片" loading="lazy" width="1080" height="568"></p><p>今天，在 Build 大会上，微软又给我们带来了一个惊喜：Copilot Stack！这是专门为 AI 驱动的软件提供的新开发模式，你可以用这种模式来实现自己的 Copilot，也能在这个框架下为 ChatGPT、Bing、Dynamics 365 和 Microsoft 365 的 Copilot 来开发新插件。整个 Stack 分为三层：展现层、逻辑层和模型层。</p><p><strong><span style="font-size: 24px">01 展现层</span></strong></p><p>展现层是用户体验层，交互界面都在这里，和传统的应用不同，这里你只需要关注自然语言，它是最简洁的界面。你可以通过语音、文字或者图像来与 Copilot 交流，Copilot 会根据你的输入来理解你的意图和需求，并给出相应的回复或建议。你可以像和一个人一样和 Copilot 对话，无需记住复杂的命令或菜单。</p><p style="text-align: center"><img src="/assets/images/a2e7596379596f003927f3f6.webp" alt="图片" loading="lazy" width="1080" height="636"></p><p>例如，微软在 Build 大会上宣布了 Windows Copilot，这是一款集成在 Windows 11 中的 Copilot 功能，它可以让你通过任务栏上的一个按钮来启动 Copilot，并通过语音或文字来与之交互。Windows Copilot 可以帮助你完成各种 Windows 相关的任务，例如搜索文件、设置提醒、安装应用、调整设置等。Windows Copilot 还可以帮助你完成一些复杂的操作，例如摘要内容或重写邮件。Windows Copilot 将使每个 Windows 用户都成为高效能用户。</p><p><strong><span style="font-size: 24px">02 逻辑层</span></strong></p><p>逻辑层是 Copilot 的业务逻辑层。在这里可以使用 Langchain 或 Symantec，框架将帮你过滤返回结果，你还能实现 Meta Prompt（格式化参数的提示词），微软也专门提供了 Prompt Workflow 方便大家可以流程化地执行提示词与模型互动。</p><p style="text-align: center"><img src="/assets/images/4e483c0ec2d7729077f465af.webp" alt="图片" loading="lazy" width="1080" height="595"></p><p>例如，如果你想要使用 Copilot 来生成一段代码，你可以使用 Meta Prompt 来指定你想要生成的代码的语言、功能、输入和输出等参数。然后，框架会根据这些参数来生成一个合适的 Prompt，并将其发送给模型层。如果模型层返回了多个结果，框架会根据一些评估标准来选择最佳结果，并将其展示给用户。如果用户对结果不满意，可以要求框架重新生成或修改结果。</p><p>在 Grounding 过程中，可以访问矢量数据库、Web APIs 以及插件。框架提供了 Prompt 之后的全部 Context 内容，让插件执行以完成任务。插件是一种可以扩展 Copilot 功能的组件，它们可以访问外部资源或服务，并将结果返回给 Copilot。</p><p>例如，如果你想要使用 Copilot 来创建一个新的 GitHub 仓库，你可以使用 GitHub 插件来调用 GitHub 的 API，并将创建成功的信息返回给 Copilot。如果你想要使用 Copilot 来搜索相关信息，你可以使用 Bing 插件来调用 Bing 的 API，并将搜索结果返回给 Copilot。</p><p><span style="font-size: 24px">03 模型层</span></p><p>模型层是 Copilot 的智能核心。你可以直接使用平台提供的基础模型，例如 GPT-4，也可以使用微调过的基础模型，当然也能调用自己的模型，或者直接集成 Huggingface 来调用开源模型。平台会根据你的输入和 Context 来选择最合适的模型来生成输出，并且会不断地学习和优化。</p><p style="text-align: center"><img src="/assets/images/ddf68f1b90caad9fb07c53b8.webp" alt="图片" loading="lazy" width="1080" height="474"></p><p>例如，在 Build 大会上，微软和 OpenAI 共同展示了 GPT-4 的最新进展和性能。GPT-4 是目前世界上最强大的基础模型之一，它拥有超过1000亿个参数，并且能够处理各种自然语言任务。GPT-4 不仅可以生成高质量的文本内容，还可以理解复杂的指令和逻辑，并且能够与用户进行流畅和有趣的对话。</p><p>Copilot Stack 是微软和 OpenAI 的持续合作的成果，它遵循了最初为 ChatGPT 引入的开放插件标准。这意味着你可以使用任何语言和框架来开发插件，并且可以与其他开发者共享和使用插件。Copilot Stack 还提供了一系列常用的扩展性插件，例如代码生成、文档生成、数据分析等，让开发者能够定制自己的编码体验。</p><p>如果你想了解更多关于 Copilot Stack 的信息，或者想要尝试一下这种新的开发模式，请访问 https://build.microsoft.com/用账号。你也可以观看 Build 大会上关于 Copilot Stack 的演讲和演示，以及 Andrej Karpathy 的 “GPT 现状” 演讲。相信你会对 AI 驱动的软件开发感到惊喜和兴奋！</p><p>参考:&nbsp;<span style="letter-spacing: 0.034em">https://build.microsoft.com/en-US/sessions/bb8f9d99-0c47-404f-8212-a85fffd3a59d</span></p><p></p>
