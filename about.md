@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: page
 title: 关于子非AI
 permalink: /about/
 description: 子非AI聚焦AI前沿应用和创新案例，分享工具实践、技术洞察与AI带来的人文问题。
@@ -11,3 +11,5 @@ description: 子非AI聚焦AI前沿应用和创新案例，分享工具实践、
 我们分享 AI 的有趣应用和实用价值，也讨论技术的边界，以及它对人的影响。
 
 本站归档公众号已发表的文章，文章页面保留微信原文链接。
+
+{% include follow.html %}
