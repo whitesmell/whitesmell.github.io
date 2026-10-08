@@ -4,6 +4,7 @@ url: https://whitesmell.github.io
 baseurl: ""
 timezone: Asia/Shanghai
 lang: zh-CN
+google_analytics: G-3EL6S0HR63
 permalink: /articles/:slug/
 markdown: kramdown
 kramdown:
