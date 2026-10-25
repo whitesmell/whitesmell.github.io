@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
 import { classifyPayment } from "./source.mjs";
 import { pagePayment } from "./migration-core.mjs";
+import { configuredDelay, publicationReady } from "./publication.mjs";
 export function parsePost(text) {
   const m = text.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
   if (!m) throw Error("Missing post frontmatter");
@@ -15,7 +16,7 @@ export function parsePost(text) {
   }
   return { meta, body: m[2] };
 }
-export function validatePost(text) {
+export function validatePost(text, timing = {}) {
   const { meta, body } = parsePost(text);
   for (const k of [
     "title",
@@ -36,6 +37,8 @@ export function validatePost(text) {
     throw Error("Unsafe article URL");
   if (!Number.isFinite(Date.parse(meta.published_at)))
     throw Error("Invalid published date");
+  if (!publicationReady(meta.published_at, timing))
+    throw Error("Publication delay not met: " + meta.source_id);
   if (meta.modified_at && !Number.isFinite(Date.parse(meta.modified_at)))
     throw Error("Invalid modified date");
   if (meta.description.length < 25 || meta.description.length > 180)
@@ -58,6 +61,7 @@ export function validatePost(text) {
   return meta;
 }
 export async function audit(root, { built = false, privateDir } = {}) {
+  const delayDays = configuredDelay(await fs.readFile(path.join(root, "_config.yml"), "utf8"));
   const files = (await fs.readdir(path.join(root, "_posts"))).filter((f) =>
     f.endsWith(".html"),
   );
@@ -65,6 +69,7 @@ export async function audit(root, { built = false, privateDir } = {}) {
   for (const file of files) {
     const meta = validatePost(
       await fs.readFile(path.join(root, "_posts", file), "utf8"),
+      { delayDays },
     );
     metas.push(meta);
   }
