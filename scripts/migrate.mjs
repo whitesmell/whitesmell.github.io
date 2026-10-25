@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { dependency, chromeBinary } from "./runtime.mjs";
+import { configuredDelay, eligibleAt, publicationReady } from "./publication.mjs";
 import {
   flag,
   identity,
@@ -24,6 +25,7 @@ const root = process.cwd(),
   );
 if (priv === root || priv.startsWith(root + path.sep))
   throw Error("Private data cannot live in site checkout");
+const delayDays = configuredDelay(await fs.readFile(path.join(root, "_config.yml"), "utf8"));
 const inventory = JSON.parse(
   await fs.readFile(path.join(priv, "inventory.json"), "utf8"),
 );
@@ -58,6 +60,7 @@ const report = {
   failed: [],
   removed: [],
   not_applicable: [],
+  deferred: [],
 };
 const browser = await chromium.launch({
   headless: true,
@@ -355,6 +358,15 @@ async function run() {
       if (source.text.length < 50) throw Error("Incomplete body");
       if (source.media.length && !source.media_preserved)
         throw Error("Embedded media requires manual preservation review");
+      const meta = metadata(row, source, prev);
+      if (!publicationReady(meta.published_at, { delayDays })) {
+        report.deferred.push({ id, title: source.title, eligible_at: new Date(eligibleAt(meta.published_at, delayDays)).toISOString() });
+        if (prev.file) {
+          await applyRemoval(root, prev, "removed");
+          // Keep private URL metadata so a corrected source date does not change the URL later.
+        }
+        continue;
+      }
       let html = source.html;
       const mapping = [];
       for (const image of new Set(source.images)) {
@@ -379,7 +391,6 @@ async function run() {
             ` width="${resource.width}" height="${resource.height}">`,
           );
       });
-      const meta = metadata(row, source, prev);
       if (overrides[id]) {
         for (const k of ["seo_title", "description", "tags"])
           if (overrides[id][k]) meta[k] = overrides[id][k];
@@ -501,5 +512,6 @@ console.log(
     unknown: report.unknown.length,
     failed: report.failed.length,
     not_applicable: report.not_applicable.length,
+    deferred: report.deferred.length,
   }),
 );
